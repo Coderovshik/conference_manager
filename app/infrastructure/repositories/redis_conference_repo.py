@@ -39,7 +39,7 @@ class RedisConferenceRepository(ConferenceRepository):
     def list_conferences(self) -> List[Conference]:
         conferences = []
         for key in self.redis.keys(f"{self.KEY_PREFIX}*"):
-            conference = self.get_conference(key.decode().replace(self.KEY_PREFIX, ""))
+            conference = self.get_conference(key.replace(self.KEY_PREFIX, ""))
             if conference:
                 conferences.append(conference)
         return conferences
