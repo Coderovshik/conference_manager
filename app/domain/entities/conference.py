@@ -1,7 +1,8 @@
-from pydantic import BaseModel, HttpUrl, EmailStr
+from pydantic import BaseModel, HttpUrl, PrivateAttr, computed_field
 from datetime import datetime
 from typing import Optional, List
 from enum import Enum
+from uuid import uuid4
 
 class ConferenceStatus(str, Enum):
     DRAFT = "draft"
@@ -11,34 +12,34 @@ class ConferenceStatus(str, Enum):
     CANCELLED = "cancelled"
 
 class Conference(BaseModel):
-    id: str
+    _id: str = PrivateAttr(default_factory=lambda: str(uuid4()))
     title: str
     description: Optional[str]
     start_time: datetime
     end_time: datetime
     status: ConferenceStatus = ConferenceStatus.DRAFT
-    
-    # Meeting link
     meeting_link: Optional[HttpUrl]
-    
-    # Additional fields
-    organizer_email: EmailStr
+    organizer: str
     max_participants: Optional[int]
     registration_deadline: Optional[datetime]
     timezone: str = "UTC"
     tags: List[str] = []
+
+    @computed_field
+    @property
+    def id(self) -> str:
+        return self._id
     
     class Config:
         json_schema_extra = {
             "example": {
-                "id": "conf-001",
                 "title": "Python Web Development Workshop",
                 "description": "Learn about modern Python web development",
                 "start_time": "2024-03-20T10:00:00Z",
                 "end_time": "2024-03-20T18:00:00Z",
                 "status": "scheduled",
                 "meeting_link": "https://zoom.us/j/123456789",
-                "organizer_email": "organizer@example.com",
+                "organizer": "user-001",
                 "max_participants": 100,
                 "registration_deadline": "2024-03-19T23:59:59Z",
                 "timezone": "UTC",
