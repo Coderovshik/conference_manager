@@ -14,7 +14,7 @@ class RedisUserRepository(UserRepository):
 
     def create_user(self, user: User) -> User:
         if self.get_user_by_username(user.username):
-            raise ValueError(f"Пользователь с именем {user.username} уже существует")
+            raise ValueError(f"User with username {user.username} already exists")
         self.redis.set(self._get_key(user.username), user.model_dump_json())
         return user
 
@@ -29,7 +29,7 @@ class RedisUserRepository(UserRepository):
 
     def update_user(self, username: str, user: User) -> User:
         if not self.get_user(username):
-            raise ValueError(f"Пользователь с именем {username} не найден")
+            raise ValueError(f"User with username {username} not found")
         self.redis.set(self._get_key(username), user.model_dump_json())
         return user
 

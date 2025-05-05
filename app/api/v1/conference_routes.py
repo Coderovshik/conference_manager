@@ -6,6 +6,7 @@ from use_cases.conference_use_cases import ConferenceUseCases
 from infrastructure.repositories.redis_conference_repo import RedisConferenceRepository
 from core.redis import get_redis
 from core.auth import get_current_user
+from uuid import uuid4
 
 router = APIRouter(prefix="/conferences", tags=["conferences"])
 
@@ -19,6 +20,8 @@ async def create_conference(
     use_cases: ConferenceUseCases = Depends(get_use_cases),
     current_user: User = Depends(get_current_user)
 ):
+    conference.conference_id = str(uuid4())
+    conference.organizer = current_user.username
     try:
         return use_cases.create_conference(conference)
     except ValueError as e:

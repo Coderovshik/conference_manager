@@ -13,9 +13,9 @@ class RedisConferenceRepository(ConferenceRepository):
         return f"{self.KEY_PREFIX}{conference_id}"
 
     def create_conference(self, conference: Conference) -> Conference:
-        if self.get_conference(conference.id):
-            raise ValueError(f"Конференция с ID {conference.id} уже существует")
-        self.redis.set(self._get_key(conference.id), conference.model_dump_json())
+        if self.get_conference(conference.conference_id):
+            raise ValueError(f"Conference with ID {conference.conference_id} already exists")
+        self.redis.set(self._get_key(conference.conference_id), conference.model_dump_json())
         return conference
 
     def get_conference(self, conference_id: str) -> Optional[Conference]:
@@ -26,7 +26,7 @@ class RedisConferenceRepository(ConferenceRepository):
 
     def update_conference(self, conference_id: str, conference: Conference) -> Conference:
         if not self.get_conference(conference_id):
-            raise ValueError(f"Конференция с ID {conference_id} не найдена")
+            raise ValueError(f"Conference with ID {conference_id} not found")
         self.redis.set(self._get_key(conference_id), conference.model_dump_json())
         return conference
 

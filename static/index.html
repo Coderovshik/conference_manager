@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление конференциями</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Управление конференциями</h1>
+            <div id="auth-section">
+                <div id="login-form">
+                    <input type="text" id="username" name="username" placeholder="Имя пользователя" autocomplete="username">
+                    <input type="password" id="password" name="password" placeholder="Пароль" autocomplete="current-password">
+                    <button onclick="register()">Регистрация</button>
+                    <button onclick="login()">Вход</button>
+                </div>
+                <div id="user-info" style="display: none;">
+                    <span id="current-user"></span>
+                    <button onclick="logout()">Выход</button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div id="conference-form" style="display: none;">
+                <h2>Создать конференцию</h2>
+                <form id="new-conference-form">
+                    <input type="text" id="title" name="title" placeholder="Название" required autocomplete="off">
+                    <textarea id="description" name="description" placeholder="Описание" required autocomplete="off"></textarea>
+                    <input type="datetime-local" id="start-time" name="start-time" required autocomplete="off">
+                    <input type="datetime-local" id="end-time" name="end-time" required autocomplete="off">
+                    <input type="url" id="meeting-link" name="meeting-link" placeholder="Ссылка на встречу" autocomplete="url">
+                    <input type="number" id="max-participants" name="max-participants" placeholder="Макс. участников" required autocomplete="off">
+                    <input type="datetime-local" id="registration-deadline" name="registration-deadline" required autocomplete="off">
+                    <input type="text" id="timezone" name="timezone" placeholder="Часовой пояс" value="UTC" autocomplete="off">
+                    <input type="text" id="tags" name="tags" placeholder="Теги (через запятую)" autocomplete="off">
+                    <button type="submit">Создать</button>
+                </form>
+            </div>
+
+            <div id="conferences-list">
+                <h2>Мои конференции</h2>
+                <div id="conferences"></div>
+            </div>
+        </main>
+    </div>
+    <script src="/static/app.js"></script>
+</body>
+</html> 
