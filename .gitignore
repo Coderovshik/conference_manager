@@ -1,0 +1,76 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Виртуальное окружение
+venv/
+env/
+ENV/
+.env
+.venv
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Тесты
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Логи
+*.log
+logs/
+
+# Локальные конфигурации
+*.local
+*.dev
+*.prod
+config.local.yaml
+config.dev.yaml
+config.prod.yaml
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# Временные файлы
+*.tmp
+*.bak
+*.swp
+*~
+
+# Redis
+dump.rdb
+*.rdb
+
+# Системные файлы
+.DS_Store
+Thumbs.db 
