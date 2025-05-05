@@ -62,7 +62,7 @@ CREATE_RESPONSE=$(curl -s -X POST "${CONF_URL}/" \
 echo "Response: $CREATE_RESPONSE"
 
 # Extract conference ID from response
-CONFERENCE_ID=$(echo $CREATE_RESPONSE | jq -r '.id')
+CONFERENCE_ID=$(echo $CREATE_RESPONSE | jq -r '.conference_id')
 
 # Test 4: Get created conference
 echo -e "\n${GREEN}Test 4: Get conference${NC}"
